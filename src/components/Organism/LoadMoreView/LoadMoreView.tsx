@@ -6,6 +6,7 @@ import { PokemonCardSkeleton } from "../../Molecules/PokemonCard/PokemonCardSkel
 import type { PokemonListItem } from "../../../types/pokemonLists";
 import { ErrorState } from "../../Molecules/ErrorState/ErrorState";
 import Centered from "../../Atoms/Centered/Centered";
+import GridDisplay from "../../Molecules/GridDisplay/GridDisplay";
 
 export const LoadMoreView = () => {
   const [offset, setOffset] = useState(0);
@@ -34,7 +35,7 @@ export const LoadMoreView = () => {
 
   return (
     <>
-      <div className="grid grid-cols-1 min-[500px]:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4 max-w-[1250px] mx-auto">
+      <GridDisplay>
         {pokemonList.map((pokemon) => {
           const pokemonId = pokemon.url.split("/")[6];
           return isFetching && pokemonList.length === 0 ? (
@@ -47,7 +48,7 @@ export const LoadMoreView = () => {
             />
           );
         })}
-      </div>
+      </GridDisplay>
       {pokemonList.length < (data?.count ?? 500) && (
         <LoadMoreButton
           loading={isFetching}

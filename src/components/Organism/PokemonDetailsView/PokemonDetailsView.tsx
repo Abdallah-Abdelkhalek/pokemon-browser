@@ -11,14 +11,28 @@ import type {
   PokemonStat,
   PokemonType,
 } from "../../../types/pokemonDetails";
+import Centered from "../../Atoms/Centered/Centered";
 
 export const PokemonDetailsView = () => {
   const { id } = useParams<{ id: string }>();
   const { data, isError, isLoading, refetch } = usePokemonDetail(id!);
   const [currentAbilityIndex, setCurrentAbilityIndex] = useState(0);
 
-  if (isLoading) return <Spinner />;
-  if (isError) return <ErrorState onRetry={refetch} />;
+  if (isLoading)
+    return (
+      <Centered>
+        <Spinner />
+      </Centered>
+    );
+  if (isError)
+    return (
+      <Centered>
+        <ErrorState
+          message="Failed to load Pokémon details"
+          onRetry={refetch}
+        />
+      </Centered>
+    );
 
   // pick a max value for scaling bars (Pokémon stats usually cap ~255)
   const MAX_STAT = 255;

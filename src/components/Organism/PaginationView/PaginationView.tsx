@@ -34,7 +34,14 @@ export const PaginationView = () => {
     if (loading || isError)
       return (
         <Centered>
-          {loading ? <Spinner /> : <ErrorState onRetry={refetch} />}
+          {loading ? (
+            <Spinner />
+          ) : (
+            <ErrorState
+              message="Failed to load Pokémon cards"
+              onRetry={refetch}
+            />
+          )}
         </Centered>
       );
     if (data)
