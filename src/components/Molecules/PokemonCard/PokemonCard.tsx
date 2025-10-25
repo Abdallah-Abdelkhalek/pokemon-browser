@@ -9,7 +9,7 @@ interface Props {
 export const PokemonCard: React.FC<Props> = ({ name, id }) => (
   <Link
     to={`/pokemon/${name}`}
-    className="bg-white rounded-xl shadow hover:scale-105 transition p-4 flex flex-col items-center"
+    className="bg-white rounded-xl shadow hover:scale-[102%] transition p-4 flex flex-col items-center"
   >
     <img
       src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png`}
