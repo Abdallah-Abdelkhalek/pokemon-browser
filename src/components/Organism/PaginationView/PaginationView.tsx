@@ -35,7 +35,7 @@ export const PaginationView = () => {
       return (
         <Centered>
           {loading ? (
-            <Spinner />
+            <Spinner color="#000000" />
           ) : (
             <ErrorState
               message="Failed to load Pokémon cards"
@@ -75,7 +75,7 @@ export const PaginationView = () => {
 
       {/* Show pagination only if data exists or during loading */}
       {(data || loading) && (
-        <div className="mt-auto py-6">
+        <div className="mt-auto">
           <PaginationControls
             perPage={limit}
             page={page}

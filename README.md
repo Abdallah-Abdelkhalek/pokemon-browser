@@ -2,6 +2,10 @@
 
 A React-based Pokédex application that allows users to explore and discover Pokémon. The app fetches data from the [PokeAPI](https://pokeapi.co/) and provides a user-friendly interface to view Pokémon details.
 
+## Live Preview
+
+You can view a live preview of the Pokédex App [here](https://pokedex-abdallah.netlify.app/).
+
 ## Features
 
 - **Infinite Scroll**: Load more Pokémon with a seamless infinite scroll experience
@@ -38,8 +42,8 @@ This project is licensed under the [MIT License](https://opensource.org/licenses
 
 ## Acknowledgements
 
-* [PokeAPI](https://pokeapi.co/): For providing a comprehensive Pokémon API
-* [React](https://reactjs.org/): For building a fast and efficient user interface
-* [Vite](https://vitejs.dev/): For fast development and build times
-* [Tailwind CSS](https://tailwindcss.com/): For styling and customizing the design
-* [Tanstack](https://tanstack.com/): For providing a robust data fetching and caching solution with React Query
+- [PokeAPI](https://pokeapi.co/): For providing a comprehensive Pokémon API
+- [React](https://reactjs.org/): For building a fast and efficient user interface
+- [Vite](https://vitejs.dev/): For fast development and build times
+- [Tailwind CSS](https://tailwindcss.com/): For styling and customizing the design
+- [Tanstack](https://tanstack.com/): For providing a robust data fetching and caching solution with React Query
