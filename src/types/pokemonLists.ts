@@ -1,3 +1,4 @@
+// List
 export interface PokemonList {
   count: number;
   next: string;
@@ -9,3 +10,4 @@ export interface PokemonListItem {
   name: string;
   url: string;
 }
+
