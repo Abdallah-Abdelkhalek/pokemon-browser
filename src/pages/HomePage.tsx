@@ -1,4 +1,3 @@
-// src/pages/HomePage.tsx
 import { useState } from "react";
 import Header from "../components/Molecules/Header/Header";
 import { PaginationView } from "../components/Organism/PaginationView/PaginationView";
@@ -9,7 +8,7 @@ const HomePage = () => {
 
   return (
     <div
-      className="min-h-screen w-full"
+      className="min-h-screen w-full pb-10 pt-5"
       style={{
         backgroundColor: view === "page-controls" ? "#e4e9fd" : "#e2fdec",
       }}
