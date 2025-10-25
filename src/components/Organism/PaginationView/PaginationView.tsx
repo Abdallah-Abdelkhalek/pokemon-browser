@@ -1,4 +1,4 @@
-import { useState, Suspense } from "react";
+import { useEffect, useState, Suspense } from "react";
 import { PaginationControls } from "../../Atoms/PaginationControl/PaginationControl";
 import { PokemonCard } from "../../Molecules/PokemonCard/PokemonCard";
 import { Spinner } from "../../Atoms/Spinner/Spinner";
@@ -8,36 +8,79 @@ import GridDisplay from "../../Molecules/GridDisplay/GridDisplay";
 
 export const PaginationView = () => {
   const [page, setPage] = useState(1);
+  const [shouldAnimate, setShouldAnimate] = useState(false);
+
   const limit = 20;
   const offset = (page - 1) * limit;
+  const total = 66;
 
-  const { data, isError, isLoading, refetch } = usePokemonList(limit, offset);
+  const { data, isError, isFetching, isLoading, refetch } = usePokemonList(
+    limit,
+    offset
+  );
 
-  if (isLoading) return <Spinner />;
-  if (isError) return <ErrorState onRetry={refetch} />;
+  const loading = isLoading || isFetching;
 
-  const total = 660;
+  // Trigger animation only after the first load
+  useEffect(() => {
+    if (!isLoading && !isFetching) {
+      setShouldAnimate(true);
+    }
+  }, [page, isLoading, isFetching]);
+
+  const Centered = ({ children }: { children: React.ReactNode }) => (
+    <div className="flex items-center justify-center min-h-[60vh]">
+      {children}
+    </div>
+  );
+
+  const renderContent = () => {
+    if (loading || isError)
+      return (
+        <Centered>
+          {loading ? <Spinner /> : <ErrorState onRetry={refetch} />}
+        </Centered>
+      );
+    if (data)
+      return (
+        <Suspense fallback={<Spinner />}>
+          <div
+            className={`transition-all duration-300 ${
+              shouldAnimate
+                ? "opacity-100 translate-y-0"
+                : "opacity-0 translate-y-2"
+            }`}
+          >
+            <GridDisplay>
+              {data.results.map((pokemon: any) => (
+                <PokemonCard
+                  id={pokemon.url.split("/")[6]}
+                  key={pokemon.name}
+                  name={pokemon.name}
+                />
+              ))}
+            </GridDisplay>
+          </div>
+        </Suspense>
+      );
+    return null;
+  };
 
   return (
-    <Suspense fallback={<Spinner />}>
-      <GridDisplay>
-        {data.results.map((pokemon: any) => (
-          <PokemonCard
-            id={pokemon.url.split("/")[6]}
-            key={pokemon.name}
-            name={pokemon.name}
-            image={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${
-              pokemon.url.split("/")[6]
-            }.png`}
+    <div className="flex flex-col min-h-screen">
+      <div className="flex-1">{renderContent()}</div>
+
+      {/* Show pagination only if data exists or during loading */}
+      {(data || loading) && (
+        <div className="mt-auto py-6">
+          <PaginationControls
+            perPage={limit}
+            page={page}
+            total={total}
+            onPageChange={setPage}
           />
-        ))}
-      </GridDisplay>
-      <PaginationControls
-        perPage={limit}
-        page={page}
-        total={total}
-        onPageChange={setPage}
-      />
-    </Suspense>
+        </div>
+      )}
+    </div>
   );
 };
