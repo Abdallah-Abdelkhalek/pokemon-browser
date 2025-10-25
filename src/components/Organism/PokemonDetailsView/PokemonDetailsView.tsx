@@ -21,7 +21,7 @@ export const PokemonDetailsView = () => {
   if (isLoading)
     return (
       <Centered>
-        <Spinner />
+        <Spinner color="#7b3a62" />
       </Centered>
     );
   if (isError)
