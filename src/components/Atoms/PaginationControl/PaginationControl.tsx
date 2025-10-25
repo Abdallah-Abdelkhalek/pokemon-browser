@@ -1,4 +1,5 @@
 import React from "react";
+import ChevronLeft from "../../../Assets/svgs/ChevronLeft";
 
 interface Props {
   page: number;
@@ -53,8 +54,9 @@ export const PaginationControls: React.FC<Props> = ({
         <button
           disabled={page === 1}
           onClick={() => onPageChange(page - 1)}
-          className="px-3 py-1 bg-white rounded disabled:opacity-50 font-medium"
+          className="px-3 py-1 bg-white rounded disabled:opacity-50 font-medium flex items-center gap-0.5"
         >
+          <ChevronLeft className="-mb-0.5" />
           Previous
         </button>
 
@@ -79,9 +81,10 @@ export const PaginationControls: React.FC<Props> = ({
         <button
           disabled={page === total}
           onClick={() => onPageChange(page + 1)}
-          className="px-3 py-1 bg-white rounded disabled:opacity-50 font-medium"
+          className="px-3 py-1 bg-white rounded disabled:opacity-50 font-medium flex items-center gap-0.5"
         >
           Next
+          <ChevronLeft className="transform rotate-180 -mb-0.5" />
         </button>
       </div>
 
