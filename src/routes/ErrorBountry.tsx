@@ -3,7 +3,7 @@ export class ErrorBoundary extends React.Component<
   { children: React.ReactNode },
   { hasError: boolean; isOffline: boolean }
 > {
-  constructor(props: any) {
+  constructor(props: { children: React.ReactNode }) {
     super(props);
     this.state = { hasError: false, isOffline: !navigator.onLine };
   }

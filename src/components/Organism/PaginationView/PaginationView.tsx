@@ -5,6 +5,8 @@ import { Spinner } from "../../Atoms/Spinner/Spinner";
 import { usePokemonList } from "../../../hooks/usePokemonList";
 import { ErrorState } from "../../Molecules/ErrorState/ErrorState";
 import GridDisplay from "../../Molecules/GridDisplay/GridDisplay";
+import type { PokemonListItem } from "../../../types/pokemonLists";
+import Centered from "../../Atoms/Centered/Centered";
 
 export const PaginationView = () => {
   const [page, setPage] = useState(1);
@@ -28,12 +30,6 @@ export const PaginationView = () => {
     }
   }, [page, isLoading, isFetching]);
 
-  const Centered = ({ children }: { children: React.ReactNode }) => (
-    <div className="flex items-center justify-center min-h-[60vh]">
-      {children}
-    </div>
-  );
-
   const renderContent = () => {
     if (loading || isError)
       return (
@@ -52,9 +48,9 @@ export const PaginationView = () => {
             }`}
           >
             <GridDisplay>
-              {data.results.map((pokemon: any) => (
+              {data.results.map((pokemon: PokemonListItem) => (
                 <PokemonCard
-                  id={pokemon.url.split("/")[6]}
+                  id={Number(pokemon.url.split("/")[6])}
                   key={pokemon.name}
                   name={pokemon.name}
                 />
