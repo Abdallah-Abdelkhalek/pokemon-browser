@@ -2,8 +2,8 @@ import { Suspense } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ErrorBoundary } from "./ErrorBountry";
 import { Spinner } from "../components/Atoms/Spinner/Spinner";
-import { PokemonDetails } from "../components/Organism/PokemonDetailsView/PokemonDetailsView";
 import HomePage from "../pages/HomePage";
+import PokemonDetailsPage from "../pages/PokemonDetailsPage";
 
 export const AppRouter = () => (
   <BrowserRouter>
@@ -11,7 +11,7 @@ export const AppRouter = () => (
       <Suspense fallback={<Spinner />}>
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/pokemon/:id" element={<PokemonDetails />} />
+          <Route path="/pokemon/:id" element={<PokemonDetailsPage />} />
         </Routes>
       </Suspense>
     </ErrorBoundary>
