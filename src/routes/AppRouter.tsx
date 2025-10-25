@@ -1,5 +1,8 @@
 import { Suspense } from "react";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import { PaginationView } from "../pages/PaginationView";
+import { ErrorBoundary } from "./ErrorBountry";
+import { Spinner } from "../components/Atoms/Spinner/Spinner";
 
 export const AppRouter = () => (
   <BrowserRouter>
@@ -7,11 +10,12 @@ export const AppRouter = () => (
       <Link to="/">Pagination</Link>
       <Link to="/load-more">Load More</Link>
     </nav>
-    <Suspense fallback={<div>Loading...</div>}>
-      <Routes>
-        <Route path="/" element={<div>Home page</div>} />
-        <Route path="/load-more" element={<div>Load More page</div>} />
-      </Routes>
-    </Suspense>
+    <ErrorBoundary>
+      <Suspense fallback={<Spinner />}>
+        <Routes>
+          <Route path="/" element={<PaginationView />} />
+        </Routes>
+      </Suspense>
+    </ErrorBoundary>
   </BrowserRouter>
 );
