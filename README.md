@@ -1,73 +1,45 @@
-# React + TypeScript + Vite
+# Pokédex App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A React-based Pokédex application that allows users to explore and discover Pokémon. The app fetches data from the [PokeAPI](https://pokeapi.co/) and provides a user-friendly interface to view Pokémon details.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Infinite Scroll**: Load more Pokémon with a seamless infinite scroll experience
+- **Page Controls**: Navigate through Pokémon using page controls
+- **Pokémon Details**: View detailed information about each Pokémon, including stats, types, and abilities
+- **Error Handling**: Robust error handling to ensure a smooth user experience
 
-## React Compiler
+## Technologies Used
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **React**: Built with React for a fast and efficient user interface
+- **TypeScript**: Written in TypeScript for type safety and maintainability
+- **Tailwind CSS**: Styled with Tailwind CSS for a responsive and customizable design
+- **PokeAPI**: Data fetched from the PokeAPI for a comprehensive Pokémon experience
+- **Vite**: Bundled with Vite for fast development and build times
+- **@tanstack/react-query**: Used for data fetching and caching with React Query
 
-## Expanding the ESLint configuration
+## Getting Started
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+1. Clone the repository: `git clone https://github.com/your-username/pokedex-app.git`
+2. Install dependencies: `npm install` or `yarn install`
+3. Start the app: `npm run dev` or `yarn dev`
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## Contributing
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+Contributions are welcome! If you'd like to contribute to the project, please:
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+1. Fork the repository
+2. Create a new branch for your feature or fix
+3. Submit a pull request with a clear description of your changes
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## License
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+This project is licensed under the [MIT License](https://opensource.org/licenses/MIT).
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## Acknowledgements
+
+* [PokeAPI](https://pokeapi.co/): For providing a comprehensive Pokémon API
+* [React](https://reactjs.org/): For building a fast and efficient user interface
+* [Vite](https://vitejs.dev/): For fast development and build times
+* [Tailwind CSS](https://tailwindcss.com/): For styling and customizing the design
+* [Tanstack](https://tanstack.com/): For providing a robust data fetching and caching solution with React Query
