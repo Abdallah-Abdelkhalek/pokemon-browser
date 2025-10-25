@@ -50,14 +50,15 @@ export const PaginationControls: React.FC<Props> = ({
   return (
     <div className="flex flex-col items-center gap-3 mt-6">
       {/* Pagination buttons */}
-      <div className="flex gap-2">
+      <div className="flex gap-2 max-[500px]:gap-1">
         <button
           disabled={page === 1}
           onClick={() => onPageChange(page - 1)}
-          className="px-3 py-1 bg-white rounded disabled:opacity-50 font-medium flex items-center gap-0.5"
+          className="px-3 max-[380px]:px-1.5 py-1 bg-white rounded disabled:opacity-50 font-medium flex items-center gap-0.5"
         >
           <ChevronLeft className="-mb-0.5" />
-          Previous
+
+          <span className="max-[550px]:hidden">Previous</span>
         </button>
 
         {createPageNumbers().map((p, i) =>
@@ -65,14 +66,14 @@ export const PaginationControls: React.FC<Props> = ({
             <button
               key={i}
               onClick={() => onPageChange(p)}
-              className={`px-3 py-1 font-medium rounded ${
+              className={`px-3 max-[380px]:px-2 py-1 font-medium rounded ${
                 page === p ? "bg-[#171619] text-white" : "bg-white text-black"
               }`}
             >
               {p}
             </button>
           ) : (
-            <span key={i} className="px-3 py-1">
+            <span key={i} className="px-1 py-1">
               {p}
             </span>
           )
@@ -81,9 +82,9 @@ export const PaginationControls: React.FC<Props> = ({
         <button
           disabled={page === total}
           onClick={() => onPageChange(page + 1)}
-          className="px-3 py-1 bg-white rounded disabled:opacity-50 font-medium flex items-center gap-0.5"
+          className="px-3 py-1 max-[380px]:px-1.5 bg-white rounded disabled:opacity-50 font-medium flex items-center gap-0.5"
         >
-          Next
+          <span className="max-[550px]:hidden">Next</span>
           <ChevronLeft className="transform rotate-180 -mb-0.5" />
         </button>
       </div>
