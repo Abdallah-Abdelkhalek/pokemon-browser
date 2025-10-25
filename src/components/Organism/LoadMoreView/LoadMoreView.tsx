@@ -3,14 +3,17 @@ import { usePokemonList } from "../../../hooks/usePokemonList";
 import { LoadMoreButton } from "../../Atoms/LoadMoreButton/LoadMoreButton";
 import { PokemonCard } from "../../Molecules/PokemonCard/PokemonCard";
 import { PokemonCardSkeleton } from "../../Molecules/PokemonCard/PokemonCardSkeleton";
+import type { PokemonListItem } from "../../../types/pokemonLists";
+import { ErrorState } from "../../Molecules/ErrorState/ErrorState";
+import Centered from "../../Atoms/Centered/Centered";
 
 export const LoadMoreView = () => {
   const [offset, setOffset] = useState(0);
   const limit = 20;
 
-  const { data, isFetching } = usePokemonList(limit, offset);
+  const { data, isFetching, isError, refetch } = usePokemonList(limit, offset);
 
-  const [pokemonList, setPokemonList] = useState<any[]>([]);
+  const [pokemonList, setPokemonList] = useState<PokemonListItem[]>([]);
 
   React.useEffect(() => {
     if (data?.results) {
@@ -22,6 +25,13 @@ export const LoadMoreView = () => {
     }
   }, [data]);
 
+  if (isError && pokemonList.length === 0)
+    return (
+      <Centered>
+        <ErrorState onRetry={refetch} />
+      </Centered>
+    );
+
   return (
     <>
       <div className="grid grid-cols-1 min-[500px]:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4 max-w-[1250px] mx-auto">
@@ -31,7 +41,7 @@ export const LoadMoreView = () => {
             <PokemonCardSkeleton key={pokemon.name} />
           ) : (
             <PokemonCard
-              id={pokemonId}
+              id={Number(pokemonId)}
               key={pokemon.name}
               name={pokemon.name}
             />
