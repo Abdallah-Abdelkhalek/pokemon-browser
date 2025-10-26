@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import BoltIcon from "../../../Assets/svgs/BoltIcon";
 import RulerIcon from "../../../Assets/svgs/RulerIcon";
@@ -16,6 +16,11 @@ export const PokemonDetailsView = () => {
   const { id } = useParams<{ id: string }>();
   const { data } = usePokemonDetail(id!);
   const [currentAbilityIndex, setCurrentAbilityIndex] = useState(0);
+
+  useEffect(() => {
+    const root = document.getElementById("root");
+    root?.scrollTo({ top: 0, behavior: "smooth" });
+  }, []);
 
   return (
     <div className="flex justify-center p-6 flex-col w-full h-full items-center lg:w-[900px] mx-auto transition-all duration-200">
