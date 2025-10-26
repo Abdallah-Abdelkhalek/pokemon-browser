@@ -29,7 +29,7 @@ export const PokemonDetailsView = () => {
           #{data?.id.toString().padStart(3, "0")}
         </span>
       </div>
-      <div className="bg-white w-full max-md:flex-col rounded-b-lg shadow-lg text-black p-6 flex gap-10">
+      <div className="bg-white w-full max-md:flex-col rounded-b-lg shadow-lg text-black p-6 flex md:gap-10">
         <div className="flex flex-col w-full md:w-1/2 items-center">
           {/* Image */}
           <div className="flex justify-center mb-4 bg-[#f6f7f9] rounded-full aspect-square w-[300px] h-[300px]">
@@ -76,15 +76,13 @@ export const PokemonDetailsView = () => {
         {/* Base Stats with bars */}
         <div className="w-full md:w-1/2">
           <h2 className="text-xl font-bold mb-2">Base Stats</h2>
-          <ul className="space-y-2 text-sm">
-            {data?.stats.map((stat: PokemonStatType) => (
-              <PokemonStat stat={stat} />
-            ))}
-          </ul>
+          {data?.stats.map((stat: PokemonStatType) => (
+            <PokemonStat stat={stat} />
+          ))}
           {/* Abilities */}
-          <div className="flex md:flex-col max-md:justify-between max-md:items-center max-md:mt-2">
-            <div className="my-4">
-              <h2 className="text-xl font-bold mb-2">Abilities</h2>
+          <div className="flex md:flex-col max-md:justify-between max-md:items-start max-md:mt-4">
+            <div className="md:my-4">
+              <h2 className="text-lg md:text-xl font-bold mb-2">Abilities</h2>
               <div className="flex flex-col justify-start gap-2">
                 {data?.abilities.map(
                   (ability: PokemonAbilityType, index: number) => (
@@ -98,9 +96,9 @@ export const PokemonDetailsView = () => {
                 )}
               </div>
             </div>
-            <div className="flex flex-col mb-4">
-              <h3 className="font-bold text-xl">Base Experience</h3>
-              <h2 className="text-[#8036bf] font-bold text-2xl">
+            <div className="flex flex-col md:mb-4">
+              <h3 className="font-bold md:text-xl">Base Experience</h3>
+              <h2 className="text-[#8036bf] font-bold text-lg md:text-2xl">
                 {data?.base_experience ?? "-"} XP
               </h2>
             </div>
