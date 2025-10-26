@@ -6,8 +6,8 @@ export interface PokemonDetail {
   weight: number;
   base_experience: number;
   types: PokemonType[];
-  stats: PokemonStat[];
-  abilities: PokemonAbility[];
+  stats: PokemonStatType[];
+  abilities: PokemonAbilityType[];
 }
 
 // Type for each Pokémon type (e.g. grass, poison, fire)
@@ -19,7 +19,7 @@ export interface PokemonType {
 }
 
 // Type for Pokémon stats (e.g. hp, attack, defense)
-export interface PokemonStat {
+export interface PokemonStatType {
   base_stat: number;
   effort: number;
   stat: {
@@ -29,7 +29,7 @@ export interface PokemonStat {
 }
 
 // Type for Pokémon abilities
-export interface PokemonAbility {
+export interface PokemonAbilityType {
   ability: {
     name: string;
     url: string;

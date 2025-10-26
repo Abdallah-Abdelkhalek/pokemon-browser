@@ -4,38 +4,18 @@ import BoltIcon from "../../../Assets/svgs/BoltIcon";
 import RulerIcon from "../../../Assets/svgs/RulerIcon";
 import WeightIcon from "../../../Assets/svgs/WeightIcon";
 import { usePokemonDetail } from "../../../hooks/usePokemonDetail";
-import { Spinner } from "../../Atoms/Spinner/Spinner";
-import { ErrorState } from "../../Molecules/ErrorState/ErrorState";
 import type {
-  PokemonAbility,
-  PokemonStat,
+  PokemonAbilityType,
+  PokemonStatType,
   PokemonType,
 } from "../../../types/pokemonDetails";
-import Centered from "../../Atoms/Centered/Centered";
+import PokemonStat from "../../Atoms/PokemonStat/PokemonStat";
+import PokemonAbility from "../../Atoms/PokemonAbility/PokemonAbility";
 
 export const PokemonDetailsView = () => {
   const { id } = useParams<{ id: string }>();
-  const { data, isError, isLoading, refetch } = usePokemonDetail(id!);
+  const { data } = usePokemonDetail(id!);
   const [currentAbilityIndex, setCurrentAbilityIndex] = useState(0);
-
-  if (isLoading)
-    return (
-      <Centered>
-        <Spinner color="#7b3a62" />
-      </Centered>
-    );
-  if (isError)
-    return (
-      <Centered>
-        <ErrorState
-          message="Failed to load Pokémon details"
-          onRetry={refetch}
-        />
-      </Centered>
-    );
-
-  // pick a max value for scaling bars (Pokémon stats usually cap ~255)
-  const MAX_STAT = 255;
 
   return (
     <div className="flex justify-center p-6 flex-col w-full h-full items-center lg:w-[900px] mx-auto transition-all duration-200">
@@ -97,21 +77,8 @@ export const PokemonDetailsView = () => {
         <div className="w-full md:w-1/2">
           <h2 className="text-xl font-bold mb-2">Base Stats</h2>
           <ul className="space-y-2 text-sm">
-            {data?.stats.map((stat: PokemonStat) => (
-              <li key={stat.stat.name} className="capitalize">
-                <div className="flex justify-between mb-1 font-medium">
-                  <span>{stat.stat.name}</span>
-                  <span className="text-[#5f6163]">{stat.base_stat}</span>
-                </div>
-                <div className="w-full bg-[#f4f4f4] rounded-full h-2">
-                  <div
-                    className="bg-black h-2 rounded-full"
-                    style={{
-                      width: `${(stat.base_stat / MAX_STAT) * 100}%`,
-                    }}
-                  />
-                </div>
-              </li>
+            {data?.stats.map((stat: PokemonStatType) => (
+              <PokemonStat stat={stat} />
             ))}
           </ul>
           {/* Abilities */}
@@ -120,25 +87,13 @@ export const PokemonDetailsView = () => {
               <h2 className="text-xl font-bold mb-2">Abilities</h2>
               <div className="flex flex-col justify-start gap-2">
                 {data?.abilities.map(
-                  (ability: PokemonAbility, index: number) => (
-                    <div
-                      className="flex items-center gap-1.5"
-                      key={ability.ability.name}
-                    >
-                      <span
-                        onClick={() => setCurrentAbilityIndex(index)}
-                        className={`px-3 py-1 ${
-                          currentAbilityIndex === index
-                            ? "border border-neutral-300"
-                            : "bg-[#f7f7f7] border border-transparent"
-                        }  rounded-full capitalize text-sm font-bold w-fit`}
-                      >
-                        {ability.ability.name}
-                      </span>
-                      {ability.is_hidden && (
-                        <span className="text-xs text-gray-500">(Hidden)</span>
-                      )}
-                    </div>
+                  (ability: PokemonAbilityType, index: number) => (
+                    <PokemonAbility
+                      ability={ability}
+                      index={index}
+                      setCurrentAbilityIndex={setCurrentAbilityIndex}
+                      currentAbilityIndex={currentAbilityIndex}
+                    />
                   )
                 )}
               </div>
