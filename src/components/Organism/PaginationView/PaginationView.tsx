@@ -1,4 +1,4 @@
-import { useEffect, useState, Suspense } from "react";
+import { useState } from "react";
 import { PaginationControls } from "../../Atoms/PaginationControl/PaginationControl";
 import { PokemonCard } from "../../Molecules/PokemonCard/PokemonCard";
 import { Spinner } from "../../Atoms/Spinner/Spinner";
@@ -10,12 +10,10 @@ import Centered from "../../Atoms/Centered/Centered";
 
 export const PaginationView = () => {
   const [page, setPage] = useState(1);
-  const [shouldAnimate, setShouldAnimate] = useState(false);
 
   const limit = 20;
   const offset = (page - 1) * limit;
   const total = 66;
-
   const { data, isError, isFetching, isLoading, refetch } = usePokemonList(
     limit,
     offset
@@ -23,19 +21,20 @@ export const PaginationView = () => {
 
   const loading = isLoading || isFetching;
 
-  // Trigger animation only after the first load
-  useEffect(() => {
-    if (!isLoading && !isFetching) {
-      setShouldAnimate(true);
+  const setPageWithScroll = (page: number) => {
+    setPage(page);
+    const element = document.getElementById("header");
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
     }
-  }, [page, isLoading, isFetching]);
+  };
 
   const renderContent = () => {
     if (loading || isError)
       return (
         <Centered>
           {loading ? (
-            <Spinner color="#000000" />
+            <Spinner showBall />
           ) : (
             <ErrorState
               message="Failed to load Pokémon cards"
@@ -46,27 +45,16 @@ export const PaginationView = () => {
       );
     if (data)
       return (
-        <Suspense fallback={<Spinner />}>
-          <div
-            className={`transition-all duration-300 ${
-              shouldAnimate
-                ? "opacity-100 translate-y-0"
-                : "opacity-0 translate-y-2"
-            }`}
-          >
-            <GridDisplay>
-              {data.results.map((pokemon: PokemonListItem) => (
-                <PokemonCard
-                  id={Number(pokemon.url.split("/")[6])}
-                  key={pokemon.name}
-                  name={pokemon.name}
-                />
-              ))}
-            </GridDisplay>
-          </div>
-        </Suspense>
+        <GridDisplay>
+          {data.results.map((pokemon: PokemonListItem) => (
+            <PokemonCard
+              id={Number(pokemon.url.split("/")[6])}
+              key={pokemon.name}
+              name={pokemon.name}
+            />
+          ))}
+        </GridDisplay>
       );
-    return null;
   };
 
   return (
@@ -80,7 +68,7 @@ export const PaginationView = () => {
             perPage={limit}
             page={page}
             total={total}
-            onPageChange={setPage}
+            onPageChange={setPageWithScroll}
           />
         </div>
       )}

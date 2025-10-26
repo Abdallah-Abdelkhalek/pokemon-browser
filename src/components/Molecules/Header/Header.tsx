@@ -11,7 +11,10 @@ const Header = ({ view, setView }: HeaderProps) => {
   };
 
   return (
-    <nav className="p-4 text-white flex justify-center gap-5 flex-col w-full items-center">
+    <nav
+      id="header"
+      className="p-4 text-white flex justify-center gap-5 flex-col w-full items-center"
+    >
       <h2 className="flex items-center gap-2 text-3xl font-bold text-black">
         <BoltIcon fill="#dcc74e" width={30} height={30} /> Pokédex
       </h2>
