@@ -1,6 +1,9 @@
 import { Link } from "react-router-dom";
 import { PokemonDetailsView } from "../components/Organism/PokemonDetailsView/PokemonDetailsView";
 import ArrowIcon from "../Assets/svgs/Arrow";
+// import { Suspense } from "react";
+// import Centered from "../components/Atoms/Centered/Centered";
+// import { Spinner } from "../components/Atoms/Spinner/Spinner";
 
 const PokemonDetailsPage = () => {
   return (
@@ -11,7 +14,16 @@ const PokemonDetailsPage = () => {
       >
         <ArrowIcon /> Back to list
       </Link>
+      {/* <Suspense
+        fallback={
+          <Centered>
+            <Spinner showBall />
+          </Centered>
+        }
+      > */}
+      {/* Intentionally hiding the wrapper suspense to showcase the global suspense */}
       <PokemonDetailsView />
+      {/* </Suspense> */}
     </div>
   );
 };
