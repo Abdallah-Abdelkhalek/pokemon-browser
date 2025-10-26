@@ -8,7 +8,7 @@ const HomePage = () => {
 
   return (
     <div
-      className="min-h-screen w-full pb-10 pt-5"
+      className="min-h-screen w-full pb-10 pt-5 transition-colors duration-300"
       style={{
         backgroundColor: view === "page-controls" ? "#e4e9fd" : "#e2fdec",
       }}

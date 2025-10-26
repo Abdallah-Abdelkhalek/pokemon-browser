@@ -74,8 +74,8 @@ export const PokemonDetailsView = () => {
           </div>
 
           {/* Physical attributes */}
-          <div className="mb-4 flex gap-2 items-center ">
-            <div className="bg-[#f6f7f9] min-w-[200px] flex flex-col items-center justify-center h-20 rounded-md text-black">
+          <div className="mb-4 flex gap-2 items-center justify-center w-full mx-auto">
+            <div className="bg-[#f6f7f9] min-w-[180px] max-[490px]:min-w-[50%] flex flex-col items-center justify-center h-20 rounded-md text-black">
               <div className="flex items-center gap-1 text-[#5a5c5e]">
                 <RulerIcon /> Height
               </div>
@@ -83,7 +83,7 @@ export const PokemonDetailsView = () => {
                 {`${data?.height !== undefined ? data.height / 10 : "-"} m`}
               </span>
             </div>
-            <div className="bg-[#f6f7f9] min-w-[180px] flex flex-col items-center justify-center h-20 rounded-md text-black">
+            <div className="bg-[#f6f7f9] min-w-[180px] max-[490px]:min-w-[50%] flex flex-col items-center justify-center h-20 rounded-md text-black">
               <div className="flex items-center gap-1 text-[#5a5c5e]">
                 <WeightIcon /> Weight
               </div>

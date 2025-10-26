@@ -26,10 +26,14 @@ export const LoadMoreView = () => {
     }
   }, [data]);
 
-  if (isError && pokemonList.length === 0)
+  if ((isError || isFetching) && pokemonList.length === 0)
     return (
       <Centered>
-        <ErrorState onRetry={refetch} />
+        {isError ? (
+          <ErrorState onRetry={refetch} />
+        ) : (
+          <LoadMoreButton loading={isFetching} onClick={() => {}} />
+        )}
       </Centered>
     );
 

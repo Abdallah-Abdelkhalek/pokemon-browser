@@ -15,7 +15,7 @@ const Header = ({ view, setView }: HeaderProps) => {
       <h2 className="flex items-center gap-2 text-3xl font-bold text-black">
         <BoltIcon fill="#dcc74e" width={30} height={30} /> Pokédex
       </h2>
-      <span className="text-[#606a73]">
+      <span className="text-[#606a73] text-center">
         Discover and explore Pokemon with{" "}
         {view === "page-controls" ? "page controls" : "infinite scroll"}
       </span>
